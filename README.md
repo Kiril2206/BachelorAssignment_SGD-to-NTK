@@ -1,0 +1,1 @@
+# BachelorAssignment_SGD-to-NTK
