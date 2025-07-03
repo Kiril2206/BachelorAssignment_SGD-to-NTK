@@ -4,8 +4,8 @@ This repository contains the code and analysis for a project exploring the accel
 
 # 1. Project structure
 - `notebooks/`: Contains the main Jupyter notebooks for analysis.
-  - `01-classification-task.ipynb`: Performs the classification task.
-  - `02-regression-task.ipynb`: Performs the regression task.
+  - `01-classification-task.ipynb`: Performs the NTK experiments on classification task.
+  - `02-regression-task.ipynb`: Performs the NTK experiments on regression task.
 - `src/`: Contains modularized Python source code.
   - `shared_utils.py`: Common functions used by both notebooks.
   - `models.py`: Neural network architecture definitions.
@@ -22,14 +22,9 @@ git clone [https://github.com/your-username/your-project-name.git](https://githu
 # Navigate into the cloned project directory
 cd BachelorAssignment_SGD-to-NTK
 
-# Create a Python virtual environment
-python -m venv venv
-
-# Activate the virtual environment
-# On macOS/Linux:
-source venv/bin/activate
-# On Windows:
-# venv\Scripts\activate
+# Create and activate a conda environment
+conda env create -f environment.yml
+conda activate hybrid_ntk
 
 # Install all the required packages from the requirements file
 pip install -r requirements.txt
