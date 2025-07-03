@@ -1,3 +1,22 @@
+import numpy as np
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '5' # Use physical GPU 5
+import sys
+print(f"Python Executable: {sys.executable}")
+
+import jax
+import jax.lib
+import jax.numpy as jnp
+from jax import grad, jit
+from jax.nn import initializers
+import matplotlib.pyplot as plt
+from functools import partial
+import time
+import copy
+from collections import deque
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+
 def run_sgd_epochs(params_initial, X_train_sgd, Y_train_onehot_sgd, X_val_full, Y_val_onehot_full,
                    start_epoch_idx, num_epochs_to_run, # start_epoch_idx is 0-based
                    batch_size, lr_sgd, key_sgd_loop, phase_label="SGD"):
