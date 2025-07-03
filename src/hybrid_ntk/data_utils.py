@@ -1,7 +1,3 @@
-def one_hot(y, num_classes):
-    y_int = np.asarray(y, dtype=int)
-    return np.eye(num_classes)[y_int.reshape(-1)]
-
 def fetch_split_data(data_name):
     if data_name == 'Fashion_MNIST'):
         print("Fetching Fashion-MNIST data...")
