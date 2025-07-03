@@ -26,8 +26,6 @@ cd BachelorAssignment_SGD-to-NTK
 conda env create -f environment.yml
 conda activate hybrid_ntk
 
-# Install all the required packages from the requirements file
-pip install -r requirements.txt
 \`\`\`
 
 # 3. Running the Notebooks
