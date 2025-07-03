@@ -1,5 +1,5 @@
 def fetch_split_data(data_name):
-    if data_name == 'Fashion_MNIST'):
+    if data_name == ('Fashion_MNIST'):
         print("Fetching Fashion-MNIST data...")
         data = fetch_openml(data_name, version=1, as_frame=False, parser='auto', cache=True)
         
