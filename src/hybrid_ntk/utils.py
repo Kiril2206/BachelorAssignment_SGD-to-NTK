@@ -1,3 +1,7 @@
+def one_hot(y, num_classes):
+    y_int = np.asarray(y, dtype=int)
+    return np.eye(num_classes)[y_int.reshape(-1)]
+    
 def init_network_params(layer_dims, key):
     keys = jax.random.split(key, len(layer_dims) - 1)
     params = []
