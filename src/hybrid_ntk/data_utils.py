@@ -1,3 +1,22 @@
+import numpy as np
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '5' # Use physical GPU 5
+import sys
+print(f"Python Executable: {sys.executable}")
+
+import jax
+import jax.lib
+import jax.numpy as jnp
+from jax import grad, jit
+from jax.nn import initializers
+import matplotlib.pyplot as plt
+from functools import partial
+import time
+import copy
+from collections import deque
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+
 def fetch_split_data(data_name):
     if data_name == ('Fashion_MNIST'):
         print("Fetching Fashion-MNIST data...")
