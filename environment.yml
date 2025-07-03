@@ -10,5 +10,6 @@ dependencies:
   - ucimlrepo
   - jupyter
   - pip
+  - jax
   - pip:
     - jax[cpu] # Or jax[cuda12_pip] for GPU
