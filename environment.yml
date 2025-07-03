@@ -15,6 +15,7 @@ dependencies:
   - matplotlib=3.8
   - jupyterlab
   - pip
+  - jax==0.4.26
 
   # --- JAX and its dependencies (installed via pip) ---
   - pip:
