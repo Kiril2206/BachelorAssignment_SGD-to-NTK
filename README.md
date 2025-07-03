@@ -17,7 +17,7 @@ First, clone the repository and set up the Python environment:
 
 \`\`\`bash
 # Clone this repository to your local machine
-git clone https://github.com/your-username/your-project-name.git
+git clone [https://github.com/your-username/your-project-name.git](https://github.com/Kiril2206/BachelorAssignment_SGD-to-NTK/tree/main)
 
 # Navigate into the cloned project directory
 cd your-project-name
