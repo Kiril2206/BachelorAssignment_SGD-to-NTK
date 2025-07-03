@@ -1,0 +1,14 @@
+name: hybrid_ntk
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - ucimlrepo
+  - jupyter
+  - pip
+  - pip:
+    - jax[cpu] # Or jax[cuda12_pip] for GPU
