@@ -15,9 +15,8 @@ This repository contains the code and analysis for a project exploring the accel
 
 First, clone the repository and set up the Python environment:
 
-\`\`\`bash
 # Clone this repository to your local machine
-git clone [https://github.com/your-username/your-project-name.git](https://github.com/Kiril2206/BachelorAssignment_SGD-to-NTK/tree/main)
+git clone [https://github.com/Kiril2206/BachelorAssignment_SGD-to-NTK/tree/main]
 
 # Navigate into the cloned project directory
 cd BachelorAssignment_SGD-to-NTK
@@ -26,7 +25,6 @@ cd BachelorAssignment_SGD-to-NTK
 conda env create -f environment.yml
 conda activate hybrid_ntk
 
-\`\`\`
 
 # 3. Running the Notebooks
 
