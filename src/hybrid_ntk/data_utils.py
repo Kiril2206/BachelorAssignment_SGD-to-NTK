@@ -43,4 +43,4 @@ def randomize(num_seeds):
     
     print(f"Master seed for this run (derived from time): {current_time_seed}")
 
-return scout_key_loop, run_keys
+    return scout_key_loop, run_keys
