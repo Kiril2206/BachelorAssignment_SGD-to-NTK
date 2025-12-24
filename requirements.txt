@@ -1,0 +1,10 @@
+jax>=0.4.20 
+jaxlib>=0.4.20 
+numpy>=1.24.0 
+scikit-learn>=1.3.0 
+pandas>=2.0.0 
+ucimlrepo>=0.0.3 # Essential for Wine Quality loading 
+PyYAML>=6.0 # For config parsing 
+matplotlib>=3.7.0 
+seaborn>=0.12.0 
+tqdm>=4.65.0 # For progress bars
