@@ -1,0 +1,22 @@
+project_name: "My-Custom-Experiment"
+dataset_name: "custom" # Corresponds to logic in loaders.py
+problem_type: "classification" # or 'regression'
+
+# Architecture
+input_dim: 100
+output_dim: 1
+hidden_layers: 
+
+# Training
+seed: 42
+batch_size: 64
+learning_rate: 0.01
+max_epochs: 50
+
+# Heuristics
+heuristics:
+  method: "parameter_norm"
+  threshold: 0.1
+  window: 5
+
+ntk_method: "ntk_1_linearized"

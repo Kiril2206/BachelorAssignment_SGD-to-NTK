@@ -1,0 +1,24 @@
+project_name: "NTK-Fashion-Classification"
+dataset_name: "fashion_mnist"
+problem_type: "classification"
+
+# Architecture
+input_dim: 784
+output_dim: 10
+hidden_layers: [10, 10]
+
+# Training Hyperparameters
+seed: 42
+batch_size: 128
+learning_rate: 0.007
+max_epochs: 15
+
+# Heuristics for Switching
+heuristics:
+  method: "parameter_norm"
+  threshold: 0.3253         # Derived from thesis scouting run
+  window: 2
+
+# NTK Strategy
+ntk_method: "ntk_1_linearized"
+ntk_sample_size: 250
