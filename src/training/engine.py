@@ -26,7 +26,8 @@ def run_hybrid_training(params, data, config):
     loss_history = []
     start_time = time.time()
     switched = False
-    ntk_meta = {} 
+    switch_epoch = None  # <--- ADD THIS
+    ntk_meta = {}
 
     print(f"Starting Training ({config['max_epochs']} epochs)...")
 
@@ -51,6 +52,7 @@ def run_hybrid_training(params, data, config):
                     print(f"--> STABILITY REACHED at Epoch {epoch} (Metric: {metric:.5f})")
                     print("--> Switching to NTK Mode...")
                     switched = True
+                    switch_epoch = epoch
                     
                     # --- PHASE 3: Prepare NTK ---
                     sample_limit = config.get('ntk_sample_size', None)
@@ -86,15 +88,17 @@ def run_hybrid_training(params, data, config):
                         remaining_epochs = config['max_epochs'] - epoch
                         
                         flat_final = ntk_update_3_integrated(
-                            ntk_meta['flat_params_0'], 
-                            ntk_meta['J0'], 
-                            ntk_meta, # <--- FIX: Corrected from passing the dict
-                            ntk_meta['f_0'], 
-                            ntk_meta['subset_y'], 
-                            remaining_epochs, 
-                            len(X_train) 
+                            ntk_meta['flat_params_0'],
+                            ntk_meta['J0'],
+                            ntk_meta['Theta0'],  
+                            ntk_meta['f_0'],
+                            ntk_meta['subset_y'],
+                            remaining_epochs,
+                            len(X_train)
                         )
                         params = unflatten_params(flat_final, treedef, shapes)
+                        final_loss = get_loss_fn(config['problem_type'])(params, ntk_meta['subset_X'], ntk_meta['subset_y'], lambda p, x: forward(p, x))
+                        loss_history.append(float(final_loss))
                         print("    One-Shot Update Complete.")
                         break 
 
@@ -113,11 +117,28 @@ def run_hybrid_training(params, data, config):
                      len(X_train)
                  )
                  params = unflatten_params(flat_new, ntk_meta['treedef'], ntk_meta['shapes'])
+                
+            elif config['ntk_method'] == 'ntk_2_functional':
+                # This method updates the function outputs directly, then projects back to params
+                # You need to verify the signature in src/ntk/updates.py
+                f_curr = forward(params, ntk_meta['subset_X'])
+                
+                flat_new = ntk_update_2_functional(
+                    flat_curr,
+                    ntk_meta['Theta0'],  # Functional update uses the Gram matrix (Theta), not Jacobian (J)
+                    f_curr,
+                    ntk_meta['subset_y'],
+                    learning_rate,
+                    len(X_train)
+                )
+                params = unflatten_params(flat_new, ntk_meta['treedef'], ntk_meta['shapes'])
             
+            loss_ntk = get_loss_fn(config['problem_type'])(params, ntk_meta['subset_X'], ntk_meta['subset_y'], lambda p, x: forward(p, x))
+
+            loss_history.append(float(loss_ntk))  # <--- THIS WAS MISSING
+
             if epoch % 1 == 0:
-                 # Optional: Evaluate on the NTK subset to see if it's working
-                 loss_ntk = get_loss_fn(config['problem_type'])(params, ntk_meta['subset_X'], ntk_meta['subset_y'], lambda p, x: forward(p, x))
-                 print(f"Epoch {epoch} (NTK): Loss on subset = {loss_ntk:.4f}")
+                print(f"Epoch {epoch} (NTK): Loss = {loss_ntk:.4f}")
 
     print(f"Training finished in {time.time() - start_time:.2f}s")
-    return params, {'loss': loss_history}
+    return params, {'loss': loss_history, 'switch_epoch': switch_epoch}

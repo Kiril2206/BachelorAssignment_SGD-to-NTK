@@ -20,3 +20,4 @@ heuristics:
   window: 5
 
 ntk_method: "ntk_1_linearized"
+ntk_sample_size:
