@@ -1,3 +1,6 @@
+import os
+import json
+import pickle
 import argparse
 import yaml
 import jax
@@ -27,6 +30,25 @@ def main():
     # 4. Run Hybrid Training
     # This function (in src.training.engine) manages the SGD -> NTK switch
     final_params, metrics = run_hybrid_training(params, data, config)
+
+    # Create results directory if it doesn't exist
+    results_dir = os.path.join("results", "logs")
+    os.makedirs(results_dir, exist_ok=True)
+    
+    # Generate a unique filename based on config
+    filename = f"{config['project_name']}_{config['ntk_method']}"
+    
+    # 1. Save Metrics (Loss History) as JSON for easy plotting
+    metrics_path = os.path.join(results_dir, f"{filename}_metrics.json")
+    with open(metrics_path, 'w') as f:
+        json.dump(metrics, f)
+    print(f"Metrics saved to: {metrics_path}")
+
+    # 2. Save Model Parameters (using Pickle for JAX arrays)
+    params_path = os.path.join(results_dir, f"{filename}_params.pkl")
+    with open(params_path, 'wb') as f:
+        pickle.dump(final_params, f)
+    print(f"Params saved to: {params_path}")
     
     print("Training Complete.")
 

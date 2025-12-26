@@ -5,7 +5,7 @@ problem_type: "regression"
 # Architecture
 input_dim: 11
 output_dim: 1
-hidden_layers: [10, 10]  # Width=500 as per thesis
+hidden_layers: [70, 70]  # Width=500 as per thesis
 
 # Training Hyperparameters
 seed: 42
@@ -20,5 +20,5 @@ heuristics:
   window: 2                 # Check stability over last 2 epochs
 
 # NTK Strategy
-ntk_method: "ntk_3_integrated" # The one-shot method
+ntk_method: "ntk_1_linearized" # The one-shot method
 ntk_sample_size: 
